@@ -1,29 +1,78 @@
-from nltk.tokenize import word_tokenize
-from nltk.tokenize import WordPunctTokenizer
+import kss
+from nltk.tokenize import sent_tokenize, TreebankWordTokenizer, word_tokenize, WordPunctTokenizer
 from tensorflow.keras.preprocessing.text import text_to_word_sequence
 
-
-def tokenize_by_word(text):
+def tokenize_by_word(text : str) -> list:
    """
-    단어 토큰화 함수
-    입력 : 토큰화할 문자열
-    출력 : 토큰화된 단어 리스트
+    Tokenizes the input text into a list of words using NLTK's word_tokenize.
+    
+    Args:
+        text (str): The string to be tokenized.
+    
+    Returns:
+        list: A list of tokenized words.
+    
    """
    return word_tokenize(text)
 
-def tokenize_by_word_punctuation(text):
+def tokenize_by_word_punctuation(text : str) -> list:
     """
-    단어 토큰화 함수, 구두점을 별도로 분리
-    입력 : 토큰화할 문자열
-    출력 : 토큰화된 단어 리스트
-    """
-    return WordPunctTokenizer(text)
+    Tokenizes the input text into the words and punctuation using NLTK's WordPunctTokenizer.
+    
+    Args:
+        text (str) : The string to be tokenized.
 
-def tokenize_with_keras(text):
+    Returns:
+        list : A list of tokenized words.
     """
-    케라스를 이용한 단어 토큰화 함수, 모든 단어 소문자 변환, 구두점 제거
-    입력 : 토큰화할 문자열
-    출력 : 토큰화된 단어 리스트
+    tokenizer = WordPunctTokenizer()
+    return tokenizer.tokenize(text)
+
+def tokenize_with_keras(text : str) -> list:
+    """
+    Tokenizes the input text into the words using Keras's text_to_word_sequence.
+    This function converts all words to lowercase and removes punctuation during tokenization.
+    
+    Args:
+        text (str) : The String to be tokenized.
+    
+    Returns:
+        list : A list of tokenized words.
     """
 
     return text_to_word_sequence(text)
+
+def tokenize_with_penntreebank(text : str) -> list:
+    """
+    Tokenizes the input text into the words using Penn Treebank Tokenization.
+
+    This tokenizer:
+    - Retains hyphenated words as single token.
+    - Sperates clitics and contractions.
+    
+    Args:
+        text (str) : The String to be tokenized.
+    
+    Returns:
+        list : A list of tokenized words.
+    """
+    tokenizer = TreebankWordTokenizer()
+    return tokenizer.tokenize(text)
+
+def tokenize_by_sent(text : str) -> list:
+    """
+    Tokenizes the input text into a list of sentences.
+    
+    This function breaks down a larger text into individual sentences.
+
+    Args :
+        text (str) : The String to be tokenized.
+    
+    Returns :
+        list : A list of tokenized sentences.
+    """
+    return sent_tokenize(text)
+
+def tokenize_by_korean_sent(text : str) -> list:
+    return kss.split_sentences(text)
+
