@@ -1,0 +1,58 @@
+from nltk.stem import LancasterStemmer, PorterStemmer, WordNetLemmatizer
+
+class normalize :
+    def __init__(self):
+        self.lancaster_stemmer = LancasterStemmer()
+        self.lemmatizer_nltk = WordNetLemmatizer()
+        self.porter_stemmer = PorterStemmer()
+
+    def lemmatize_by_nltk(self, words : list) -> list:
+        """
+        Lemmatizes each word in a list of tokens.
+        This process converts words to their base or dictionary form (lemma).
+        Normalizing text in this way can help reduce vocabulary size and improve computational efficiency in downstream task.
+
+        Args: 
+            words (list): The list of word tokens to lemmatize.
+        
+        Returns: 
+            list: A new list contaning the lemmatized words.
+        """
+        return [self.lemmatize_by_nltk.lemmatize(words) for word in words]
+    
+    def stem_by_porter(self, words : list) -> list:
+        """
+        Stems each word in a list of tokens.
+        This process normalizes various forms of words,
+        which helps models recognize their inherent meaning.
+        This is achieved by reducing overall vocabulary size and mitigating word sparsity.
+        
+        The Porter stemming algorithm follows specific rules for suffix removal, such as:
+        -   ALIZE -> AL
+        -   ANCE -> remove
+        -   ICAL -> IC
+
+        Args:
+            words (list): The list of word tokens to be stemmed.
+        
+        Returns:
+            list: A new list containing the stemmed words.
+        """
+        return [self.porter_stemmer.stem(w) for w in words]
+    
+    def stem_by_lancaster(self, words : list) -> list:
+        """
+        Stems each word in a list of tokens.
+        This process normalizes various forms of words,
+        which helps models recognize their inherent meaning.
+        This is achieved by reducing overall vocabulary size and mitigating word sparsity.
+
+        Args:
+            words (list): The list of word tokens to be stemmed.
+        
+        Returns:
+            list: A new list containing the stemmed words.
+        """
+        return [self.lancaster_stemmer.stem(w) for w in words]
+
+    
