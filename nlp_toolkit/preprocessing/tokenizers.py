@@ -12,9 +12,6 @@ class Tokenizers:
         self.wordpunct_tokenizer = WordPunctTokenizer()
         self.word_tokenizer = word_tokenize
         self.text_to_seq = text_to_word_sequence
-        
-
-    ## Start Tokenization
 
     def tokenize_by_word(self, text : str) -> list:
         """
@@ -27,7 +24,7 @@ class Tokenizers:
                 list: A list of tokenized words.
             
         """
-        return self.word_tokenize(text)
+        return self.word_tokenizer(text)
 
     def tokenize_by_word_punctuation(self, text : str) -> list:
         """
